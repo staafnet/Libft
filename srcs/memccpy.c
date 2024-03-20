@@ -6,7 +6,7 @@
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:05:40 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/03/20 07:06:34 by rgrochow         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:37:40 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void *ft_memccpy(void *dst, const void *src, int c, size_t n)
 		dst_ptr[i] = src_ptr[i];
 		if (src_ptr[i] == (unsigned char)c)
 		{
-			dst_ptr[i + 1] = '\0'; // Dodaj terminator null po skopiowanych danych
+			dst_ptr[i + 1] = '\0';
 			return ((void *)&dst_ptr[i + 1]);
 		}
 		i++;

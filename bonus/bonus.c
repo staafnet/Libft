@@ -6,13 +6,13 @@
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 07:15:43 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/03/20 10:19:47 by rgrochow         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:36:08 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_bonus()
+void	ft_bonus(void)
 {
 
 }
