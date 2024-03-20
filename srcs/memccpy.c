@@ -6,7 +6,7 @@
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 20:05:40 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/03/12 21:13:03 by rgrochow         ###   ########.fr       */
+/*   Updated: 2024/03/20 07:06:34 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,4 @@ void *ft_memccpy(void *dst, const void *src, int c, size_t n)
 	}
 	return (NULL);
 }
+
