@@ -6,11 +6,11 @@
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 19:24:11 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/03/12 20:04:22 by rgrochow         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:43:10 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 void	ft_memcpy_test(void)
 {

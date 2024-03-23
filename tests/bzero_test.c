@@ -6,11 +6,11 @@
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 21:04:00 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/03/11 21:15:58 by rgrochow         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:43:26 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 void	ft_bzero_test(void)
 {
