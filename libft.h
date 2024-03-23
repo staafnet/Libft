@@ -1,14 +1,12 @@
 #ifndef LIBFT_H
 #define LIBFT_H
 
-//#include <stdio.h>
-//#include <string.h>
 #include <stddef.h>
 #include <stdlib.h>
+
 /*
 ** Structure for a linked list node
 */
-
 typedef struct s_list
 {
 	void *content;
