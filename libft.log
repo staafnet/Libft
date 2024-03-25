@@ -2,3 +2,50 @@
 2024-03-23 17:21:54 [!] Before using 'make tests', please run 'make' to generate the library
 2024-03-23 18:12:10 [✔] Library created
 2024-03-23 18:12:47 [✔] Library created
+2024-03-23 20:32:25 [✔] Library created
+2024-03-23 20:32:30 [✔] Library created
+2024-03-23 22:02:23 [!] Before using 'make bonus', please run 'make' to generate the library
+2024-03-23 22:02:27 [✔] Library created
+2024-03-23 22:03:00 [✔] Bonus functions added to the library
+2024-03-23 22:03:08 [!] Before using 'make bonus', please run 'make' to generate the library
+2024-03-23 22:03:11 [✔] Library created
+2024-03-23 22:03:13 [✔] Bonus functions added to the library
+2024-03-23 22:03:58 [!] Bonus functions were already added to the library
+2024-03-23 22:04:05 [!] Bonus functions were already added to the library
+2024-03-23 22:04:10 [!] Before using 'make bonus', please run 'make' to generate the library
+2024-03-23 22:04:15 [✔] Library created
+2024-03-23 22:04:17 [✔] Bonus functions added to the library
+2024-03-23 22:04:20 [!] Bonus functions were already added to the library
+2024-03-23 22:34:11 [✔] Library created
+2024-03-23 22:36:15 [✔] Bonus functions added to the library
+2024-03-23 22:52:46 [✔] Library created
+2024-03-23 22:53:02 [✔] Bonus functions added to the library
+2024-03-23 23:51:52 [!] Before using 'make tests', please run 'make' to generate the library
+2024-03-23 23:51:56 [✔] Library created
+2024-03-23 23:55:52 [!] Before using 'make tests', please run 'make' to generate the library
+2024-03-23 23:55:58 [✔] Library created
+2024-03-23 23:59:24 [✔] Library created
+2024-03-24 00:24:18 [✔] Library created
+2024-03-24 00:27:06 [✔] Tests compiled
+2024-03-24 00:28:25 [!] Before using 'make tests', please run 'make' to generate the library
+2024-03-24 00:28:28 [✔] Library created
+2024-03-24 00:28:30 [✔] Tests compiled
+2024-03-24 01:06:43 [✔] Tests compiled
+2024-03-24 01:21:10 [✔] Tests compiled
+2024-03-24 01:35:23 [✔] Tests compiled
+2024-03-24 01:35:23 [!] Valgrind is not installed. Skipping Valgrind tests...
+2024-03-24 01:39:06 [✔] Tests compiled
+2024-03-24 01:39:06 [!] Valgrind is not installed. Skipping Valgrind tests...
+2024-03-24 01:46:18 [✔] Tests compiled
+2024-03-24 01:46:18 [!] Valgrind is not installed. Skipping Valgrind tests...
+2024-03-24 08:57:21 [✔] Library created
+2024-03-24 08:57:38 [✔] Tests compiled
+2024-03-24 08:57:38 [!] Valgrind is not installed. Skipping Valgrind tests...
+2024-03-24 12:21:36 [✔] Library created
+2024-03-24 12:21:46 [✔] Tests compiled
+2024-03-24 12:21:46 [!] Valgrind is not installed. Skipping Valgrind tests...
+2024-03-24 12:41:35 [✔] Tests compiled
+2024-03-24 12:41:35 [!] Valgrind is not installed. Skipping Valgrind tests...
+2024-03-24 13:38:11 [✔] Library created
+2024-03-24 20:04:55 [✔] Library created
+2024-03-24 20:05:11 [✔] Library created

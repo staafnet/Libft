@@ -2,6 +2,7 @@ int ft_atoi(const char *str)
 {
 	int result = 0;
 	int sign = 1;
+
 	while (*str && ((*str >= 9 && *str <= 13) || *str == ' '))
 		str++;
 	if (*str == '-' || *str == '+')

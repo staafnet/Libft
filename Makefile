@@ -3,6 +3,7 @@ LOG_FILE = libft.log
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DATE_TIME := $(shell date +"%Y-%m-%d %T")
+VALGRIND_OPTS := --leak-check=full --show-leak-kinds=all --track-origins=yes
 
 OBJS_DIR := objs/
 BONUS_DIR := bonus/
@@ -38,7 +39,7 @@ bonus: $(BONUS_OBJ)
         echo "$(YELLOW)[!] Before using 'make bonus', please run 'make' to generate the library$(RESET)"; \
         echo "$(DATE_TIME) [!] Before using 'make bonus', please run 'make' to generate the library" >> $(LOG_FILE); \
     else \
-        if ar t $(NAME) | grep -q "bonus.o"; then \
+        if ar t $(NAME) | grep -q "ft_lstadd_back.o"; then \
             echo "$(YELLOW)[!] Bonus functions were already added to the library$(RESET)"; \
 			echo "$(DATE_TIME) [!] Bonus functions were already added to the library" >> $(LOG_FILE); \
 		else \
@@ -64,8 +65,17 @@ tests: $(TEST_OBJ)
 			echo "$(DATE_TIME) [!] Tests were already compiled" >> $(LOG_FILE); \
 		else \
 			$(CC) $(CFLAGS) -o run_tests $(TEST_OBJ) $(NAME) && \
-			echo "$(GREEN)[✔] Tests compiled. To run, use: ./run_tests$(RESET)"; \
+			echo "$(GREEN)[✔] Tests compiled.$(RESET)"; \
 			echo "$(DATE_TIME) [✔] Tests compiled" >> $(LOG_FILE); \
+			if [ -x "$$(which valgrind)" ]; then \
+    			echo "$(GREEN)[✔] Valgrind is installed. Running tests with Valgrind...$(RESET)"; \
+    			echo "$(DATE_TIME) [✔] Valgrind is installed. Running tests with Valgrind..." >> $(LOG_FILE); \
+    			valgrind $(VALGRIND_OPTS) ./run_tests; \
+			else \
+    			echo "$(YELLOW)[!] Valgrind is not installed. Skipping Valgrind tests...$(RESET)"; \
+    			echo "$(DATE_TIME) [!] Valgrind is not installed. Skipping Valgrind tests..." >> $(LOG_FILE); \
+    			./run_tests; \
+			fi \
 		fi \
     fi
 	
@@ -85,3 +95,6 @@ fclean: clean
 re: fclean all
 
 .PHONY: all bonus tests clean fclean re
+
+
+

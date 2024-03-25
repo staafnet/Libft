@@ -1,8 +1,16 @@
 #ifndef LIBFT_H
 #define LIBFT_H
-
+#define COLOR_BLUE "\033[0;34m"
+#define COLOR_GREEN "\033[0;32m"
+#define COLOR_RED "\033[0;31m"
+#define COLOR_RESET "\033[0m"
+#include <unistd.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <fcntl.h>
 
 /*
 ** Structure for a linked list node
@@ -25,6 +33,7 @@ size_t ft_strlen(const char *s);
 void *ft_memset(void *b, int c, size_t len);
 void ft_bzero(void *s, size_t n);
 void *ft_memcpy(void *dst, const void *src, size_t n);
+void *ft_memccpy(void *dest, const void *src, int c, size_t n);
 void *ft_memmove(void *dst, const void *src, size_t len);
 size_t ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t ft_strlcat(char *dst, const char *src, size_t dstsize);
@@ -48,6 +57,7 @@ char *ft_strjoin(char const *s1, char const *s2);
 char *ft_strtrim(char const *s1, char const *set);
 char **ft_split(char const *s, char c);
 char *ft_itoa(int n);
+void ft_striteri(char *s, void (*f)(unsigned int, char *));
 char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void ft_putchar_fd(char c, int fd);
 void ft_putstr_fd(char *s, int fd);
