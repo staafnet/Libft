@@ -1,25 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isprint_test.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/05 07:13:07 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/04/05 08:33:19 by rgrochow         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft.h"
 
-void ft_isprint_test(void)
+void	ft_isprint_unit_test(void)
 {
-	printf(COLOR_BLUE "Testing ft_isprint:\n" COLOR_RESET);
+	char	a;
 
-	int success = 1;
-	int i = -200;
-	while (i <= 200)
+	a = 0;
+	printf(COLOR_BLUE "Insert characters and press Enter: " COLOR_RESET);
+	while (a != '\n')
 	{
-		int result_ft = ft_isprint(i);
-		int result_standard = isprint(i);
+		if (scanf("%c", &a) == '\n')
+			return ;
+		if (a == '\n')
+			return ;
+		if (ft_isprint(a))
+			printf(COLOR_BLUE "This is a printable character -> "
+				COLOR_RESET "%c\n", a);
+		else
+			printf(COLOR_BLUE "This is NOT a printable character (ASCII) -> "
+				COLOR_RESET "%d\n", a);
+	}
+}
 
-		if (result_ft != result_standard)
+void	ft_isprint_test(void)
+{
+	int		c;
+	size_t	i;
+
+	c = -300;
+	i = 0;
+	while (c <= 300)
+	{
+		if (isprint(c) != ft_isprint(c))
 		{
-			printf(COLOR_RED "Test failed: Input: '%c' (%d), ft_isprint result: %d, isprint result: %d\n" COLOR_RESET, (isprint(i) ? i : '.'), i, result_ft, result_standard);
-			success = 0;
+			printf(COLOR_RED "Test failed: Input: %c\n", c);
+			printf("Expected: %d, Result: %d\n"
+				COLOR_RESET, isprint(c), ft_isprint(c));
+			return ;
 		}
-
+		c++;
 		i++;
 	}
-
-	if (success)
-		printf(COLOR_GREEN "All tests passed successfully!\n" COLOR_RESET);
+	printf(COLOR_GRAY "Total tests: " COLOR_LIGHT_GREEN "%ld\n" COLOR_RESET, i);
+	ft_isprint_unit_test();
 }

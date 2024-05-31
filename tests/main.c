@@ -5,73 +5,164 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/11 17:14:48 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/03/23 22:28:39 by rgrochow         ###   ########.fr       */
+/*   Created: 2024/04/01 17:29:50 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/04/05 13:07:18 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libft.h"
 #include "libft_tests.h"
 
-void run_libc_tests(void)
+int	generate_strings_length1(char *c)
 {
-	ft_memset_test();
-	ft_bzero_test();
-	ft_memcpy_test();
-	ft_memccpy_test();
-	ft_memmove_test();
-	ft_memchr_test();
-	ft_memcmp_test();
-	ft_strlen_test();
-	ft_strlcpy_test();
-	ft_strlcat_test();
-	ft_strchr_test();
-	ft_strrchr_test();
-	ft_strnstr_test();
-	ft_strncmp_test();
-	ft_atoi_test();
-	ft_isalpha_test();
-	ft_isdigit_test();
-	ft_isalnum_test();
-	ft_isascii_test();
-	ft_isprint_test();
-	ft_toupper_test();
-	ft_tolower_test();
+	int	i;
+
+	i = 0;
+	while (i <= 127)
+	{
+		c[0] = i;
+		c[1] = '\0';
+		if (strlen(c) != ft_strlen(c))
+			return (0);
+		i++;
+	}
+	return (i);
 }
 
-void run_additional_tests(void)
+int	generate_strings_length2(char *c)
 {
-	ft_calloc_test();
-	ft_strdup_test();
-	ft_substr_test();
-	ft_strjoin_test();
-	ft_strtrim_test();
-	ft_split_test();
-	ft_itoa_test();
-	ft_strmapi_test();
-	ft_putchar_fd_test();
-	ft_putstr_fd_test();
-	ft_putendl_fd_test();
-	ft_putnbr_fd_test();
+	int	i;
+	int	j;
+	int	t;
+
+	i = 0;
+	t = 0;
+	while (i <= 127)
+	{
+		j = 0;
+		while (j <= 127)
+		{
+			c[0] = i;
+			c[1] = j;
+			c[2] = '\0';
+			if (strlen(c) != ft_strlen(c))
+				return (0);
+			j++;
+			t++;
+		}
+		i++;
+	}
+	return (t);
 }
 
-void run_bonus_tests(void)
+int	generate_strings_length3(char *c)
 {
-	ft_lstnew_test();
-	ft_lstadd_front_test();
-	ft_lstsize_test();
-	ft_lstlast_test();
-	ft_lstadd_back_test();
-	ft_lstdelone_test();
-	ft_lstclear_test();
-	ft_lstiter_test();
-	ft_lstmap_test();
+	int	i;
+	int	j;
+	int	k;
+	int	t;
+
+	i = 0;
+	t = 0;
+	while (i <= 127)
+	{
+		j = 0;
+		while (j <= 127)
+		{
+			k = 0;
+			while (k <= 127)
+			{
+				c[0] = i;
+				c[1] = j;
+				c[2] = k;
+				c[3] = '\0';
+				if (strlen(c) != ft_strlen(c))
+					return (0);
+				k++;
+				t++;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (t);
 }
 
-int main(void)
+int	ft_norminette(char *directory, char *file_name, char *function_name)
 {
-	run_libc_tests();
-	run_additional_tests();
-	run_bonus_tests();
+	FILE	*fp;
+	char	command[256];
+	char	line[256];
 
+	printf(COLOR_GRAY "\n--- %s ---" COLOR_RED "\n", function_name);
+	sprintf(command, "norminette %s/%s", directory, file_name);
+	fp = popen(command, "r");
+	if (fp == NULL)
+		exit(EXIT_FAILURE);
+	fgets(line, sizeof(line), fp);
+	pclose(fp);
+	if (strstr(line, ": OK!") != NULL)
+	{
+		printf(COLOR_GRAY "norminette:  " COLOR_LIGHT_GREEN "OK\n" COLOR_RESET);
+		return (1);
+	}
+	else
+	{
+		printf(COLOR_RED);
+		system(command);
+		printf(COLOR_RESET);
+		return (0);
+	}
+}
+
+void	ft_test_function(const char *function_name)
+{
+	if (strcmp(function_name, "ft_isalpha") == 0)
+		ft_isalpha_test();
+	if (strcmp(function_name, "ft_isdigit") == 0)
+		ft_isdigit_test();
+	if (strcmp(function_name, "ft_isalnum") == 0)
+		ft_isalnum_test();
+	if (strcmp(function_name, "ft_isascii") == 0)
+		ft_isascii_test();
+	if (strcmp(function_name, "ft_isprint") == 0)
+		ft_isprint_test();
+	if (strcmp(function_name, "ft_tolower") == 0)
+		ft_tolower_test();
+	if (strcmp(function_name, "ft_toupper") == 0)
+		ft_toupper_test();
+	if (strcmp(function_name, "ft_strlen") == 0)
+		ft_strlen_test();
+}
+
+void	ft_test_files(char *directory)
+{
+	DIR				*dir;
+	struct dirent	*entry;
+	char			function_name[256];
+
+	dir = opendir(directory);
+	if (dir == NULL)
+		exit(EXIT_FAILURE);
+	while ((entry = readdir(dir)) != NULL)
+	{
+		if (strlen(entry->d_name) < 2 || strncmp(entry->d_name, "ft_", 3) != 0)
+			continue ;
+
+		strncpy(function_name, entry->d_name, sizeof(function_name) - 1);
+		function_name[sizeof(function_name) - 1] = '\0';
+
+		function_name[strlen(function_name) - 2] = '\0';
+
+		if (ft_norminette(directory, entry->d_name, function_name))
+			ft_test_function(function_name);
+	}
+	closedir(dir);
+}
+
+int	main(void)
+{
+	ft_test_files(".");
+	ft_test_files("./bonus");
 	return (0);
 }

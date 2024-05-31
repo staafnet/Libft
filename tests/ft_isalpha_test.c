@@ -1,27 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalpha_test.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/01 20:28:03 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/04/04 19:00:19 by rgrochow         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../libft.h"
 
-void ft_isalpha_test(void)
+void	ft_isalpha_unit_test(void)
 {
-	printf(COLOR_BLUE "Testing ft_isalpha:\n" COLOR_RESET);
+	char	a;
 
-	int success = 1; // Flag indicating whether all tests passed successfully
+	a = 0;
+	printf(COLOR_BLUE "Insert characters and press Enter: " COLOR_RESET);
+	while (a != '\n')
+	{
+		if (scanf("%c", &a) == '\n')
+			return ;
+		if (ft_isalpha(a))
+			printf(COLOR_BLUE "This is a letter of the alphabet -> "
+				COLOR_RESET "%c\n", a);
+		else if (a == '\n')
+			return ;
+		else
+			printf(COLOR_BLUE "This is NOT a letter of the alphabet (ASCII) -> "
+				COLOR_RESET "%d\n", a);
+	}
+}
 
-	int c = 0;
+void	ft_isalpha_test(void)
+{
+	int		c;
+
+	c = 0;
 	while (c <= 127)
 	{
-		int result_ft = ft_isalpha(c);
-		int result_standard = isalpha(c);
-
-		if (result_ft != result_standard)
+		if (isalpha(c) != ft_isalpha(c))
 		{
-			printf(COLOR_RED "Test failed: Input: '%c' (%d), ft_isalpha result: %d, isalpha result: %d\n" COLOR_RESET, (isprint(c) ? c : '.'), c, result_ft, result_standard);
-			success = 0;
+			printf(COLOR_RED "Test failed: Input: %c\n", c);
+			printf("Expected: %d, Result: %d\n"
+				COLOR_RESET, isalpha(c), ft_isalpha(c));
+			return ;
 		}
-
 		c++;
 	}
-
-	if (success)
-		printf(COLOR_GREEN "All tests passed successfully!\n" COLOR_RESET);
+	printf(COLOR_GRAY "Total tests: " COLOR_LIGHT_GREEN "%d\n" COLOR_RESET, c);
+	ft_isalpha_unit_test();
 }
