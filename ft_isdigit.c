@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 16:43:39 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/04/04 16:55:13 by rgrochow         ###   ########.fr       */
+/*   Created: 2024/05/31 17:42:39 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 17:42:42 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {

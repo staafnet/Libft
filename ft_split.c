@@ -1,97 +1,104 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/31 19:36:53 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 20:26:50 by rgrochow         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static size_t count_words(const char *s, char c)
+static char	**free_array(char **ptr, int i)
 {
-	size_t words = 0;
-	int in_word = 0; // Flaga wskazująca, czy aktualnie jesteśmy w słowie
-	while (*s)
+	while (i > 0)
 	{
-		if (*s == c)
-		{
-			in_word = 0;
-		}
-		else if (!in_word)
-		{
-			in_word = 1;
-			words++;
-		}
-		s++;
+		i--;
+		free(ptr[i]);
 	}
-	return words;
+	free(ptr);
+	return (0);
 }
 
-static char *ft_strndup(const char *src, size_t n)
+static int	ft_count_words(char const *str, char c)
 {
-	char *dst = (char *)malloc(sizeof(char) * (n + 1));
-	if (!dst)
-		return NULL;
-	size_t i;
-	for (i = 0; i < n; i++)
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i] != '\0')
 	{
-		dst[i] = src[i];
+		if (str[i] == c)
+			i++;
+		else
+		{
+			count++;
+			while (str[i] && str[i] != c)
+				i++;
+		}
 	}
-	dst[i] = '\0'; // Dodanie znaku null-terminatora
-	return dst;
+	return (count);
 }
 
-char **ft_split(char const *s, char c)
+static char	*ft_putword(char *word, char const *s, int i, int word_len)
 {
+	int	j;
+
+	j = 0;
+	while (word_len > 0)
+	{
+		word[j] = s[i - word_len];
+		j++;
+		word_len--;
+	}
+	word[j] = '\0';
+	return (word);
+}
+
+static char	**ft_split_words(char const *s, char c, char **s2, int num_words)
+{
+	int	i;
+	int	word;
+	int	word_len;
+
+	i = 0;
+	word = 0;
+	word_len = 0;
+	while (word < num_words)
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		while (s[i] && s[i] != c)
+		{
+			i++;
+			word_len++;
+		}
+		s2[word] = (char *)malloc(sizeof(char) * (word_len + 1));
+		if (!s2)
+			return (free_array(s2, word));
+		ft_putword(s2[word], s, i, word_len);
+		word_len = 0;
+		word++;
+	}
+	s2[word] = 0;
+	return (s2);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char			**s2;
+	unsigned int	num_words;
+
 	if (!s)
-		return NULL;
-
-	size_t words = count_words(s, c);
-	char **result = (char **)malloc(sizeof(char *) * (words + 1)); // Tablica na słowa plus NULL na końcu
-	if (!result)
-		return NULL;
-	result[words] = NULL; // Ustawienie ostatniego elementu na NULL, zgodnie z wymogiem
-
-	size_t word_index = 0;
-	int in_word = 0;	   // Flaga wskazująca, czy aktualnie jesteśmy w słowie
-	const char *start = s; // Wskaźnik na początek bieżącego słowa
-	while (*s)
-	{
-		if (*s == c)
-		{
-			if (in_word)
-			{
-				// Jeśli byliśmy w słowie, to kopiujemy je do tablicy result
-				result[word_index++] = ft_strndup(start, s - start);
-				if (!result[word_index - 1])
-				{
-					// W przypadku błędu w alokacji pamięci zwalniamy dotychczasowe zaalokowane słowa i zwracamy NULL
-					for (size_t i = 0; i < word_index; i++)
-					{
-						free(result[i]);
-					}
-					free(result);
-					return NULL;
-				}
-				in_word = 0;
-			}
-		}
-		else if (!in_word)
-		{
-			in_word = 1;
-			start = s;
-		}
-		s++;
-	}
-
-	// Sprawdzamy, czy ostatnie słowo nie zostało przegapione (jeśli string kończy się znakiem inny niż 'c')
-	if (in_word)
-	{
-		result[word_index++] = ft_strndup(start, s - start);
-		if (!result[word_index - 1])
-		{
-			// W przypadku błędu w alokacji pamięci zwalniamy dotychczasowe zaalokowane słowa i zwracamy NULL
-			for (size_t i = 0; i < word_index; i++)
-			{
-				free(result[i]);
-			}
-			free(result);
-			return NULL;
-		}
-	}
-
-	return result;
+		return (0);
+	num_words = ft_count_words(s, c);
+	s2 = (char **)malloc(sizeof(char *) * (num_words + 1));
+	if (!s2)
+		return (0);
+	s2 = ft_split_words(s, c, s2, num_words);
+	return (s2);
 }

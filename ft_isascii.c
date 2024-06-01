@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 20:29:25 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/04/04 20:29:58 by rgrochow         ###   ########.fr       */
+/*   Created: 2024/05/31 17:40:16 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 17:42:10 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isascii(int c)
 {

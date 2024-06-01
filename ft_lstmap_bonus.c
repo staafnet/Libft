@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 18:33:31 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/05/31 21:00:53 by rgrochow         ###   ########.fr       */
+/*   Created: 2024/05/31 18:01:22 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 21:43:44 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *str, const char *to_find, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	size_t	i;
-	size_t	j;
+	t_list	*new_list;
+	t_list	*save;
 
-	i = 0;
-	if (!str && !len)
+	if (!lst || !f || !del)
 		return (0);
-	if (to_find[0] == '\0' || to_find == str)
-		return ((char *)str);
-	while (str[i] != '\0')
+	new_list = ft_lstnew(f(lst->content));
+	if (!new_list)
+		return (0);
+	save = new_list;
+	lst = lst->next;
+	while (lst)
 	{
-		j = 0;
-		while (str[i + j] == to_find[j] && (i + j) < len)
+		new_list->next = ft_lstnew(f(lst->content));
+		if (!new_list->next)
 		{
-			if (str[i + j] == '\0' && to_find[j] == '\0')
-				return ((char *)&str[i]);
-			j++;
+			ft_lstclear(&save, del);
+			return (0);
 		}
-		if (to_find[j] == '\0')
-			return ((char *)(str + i));
-		i++;
+		new_list = new_list->next;
+		lst = lst->next;
 	}
-	return (0);
+	new_list->next = NULL;
+	return (save);
 }

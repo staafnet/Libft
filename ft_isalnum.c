@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 19:44:32 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/04/04 20:03:13 by rgrochow         ###   ########.fr       */
+/*   Created: 2024/05/31 17:38:45 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 17:41:50 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isalnum(int c)
 {

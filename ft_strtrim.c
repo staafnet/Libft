@@ -1,54 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/31 20:11:21 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 20:15:19 by rgrochow         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char *ft_strtrim(char const *s1, char const *set)
+static int	ft_check_set(char const c, char const *set)
 {
-	char *trimmed;
-	size_t len_s1 = 0;
-	size_t start = 0;
-	size_t end = 0;
-	size_t i = 0;
+	int	i;
+
+	i = 0;
+	while (set[i] != '\0')
+	{
+		if (set[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t	size;
+	char	*new;
 
 	if (!s1 || !set)
-		return NULL;
-	while (s1[len_s1])
-		len_s1++;
-	while (s1[start])
+		return (NULL);
+	while (s1)
 	{
-		int found = 0;
-		for (size_t j = 0; set[j]; j++)
-		{
-			if (s1[start] == set[j])
-			{
-				found = 1;
-				break;
-			}
-		}
-		if (!found)
-			break;
-		start++;
+		if (ft_check_set(((char)*s1), set) == 1)
+			s1++;
+		else
+			break ;
 	}
-	end = len_s1;
-	while (end > start)
+	size = ft_strlen(s1);
+	while (size != 0)
 	{
-		int found = 0;
-		for (size_t j = 0; set[j]; j++)
-		{
-			if (s1[end - 1] == set[j])
-			{
-				found = 1;
-				break;
-			}
-		}
-		if (!found)
-			break;
-		end--;
+		if (ft_check_set(s1[size - 1], set) == 1)
+			size--;
+		else
+			break ;
 	}
-	trimmed = (char *)malloc(sizeof(char) * (end - start + 1));
-	if (!trimmed)
-		return NULL;
-
-	for (i = 0; start < end; i++, start++)
-		trimmed[i] = s1[start];
-	trimmed[i] = '\0';
-	return trimmed;
+	new = (char *)malloc(size * sizeof(char) + 1);
+	if (!new)
+		return (NULL);
+	ft_strlcpy(new, (char *)s1, size + 1);
+	return (new);
 }

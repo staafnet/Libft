@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 18:27:15 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/05/31 18:29:01 by rgrochow         ###   ########.fr       */
+/*   Created: 2024/05/31 18:18:29 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 18:20:42 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+t_list	*ft_lstnew(void *content)
 {
-	size_t	srclen;
-	size_t	dstlen;
-	size_t	total_len;
+	t_list	*new_elem;
 
-	srclen = ft_strlen(src);
-	dstlen = ft_strlen(dst);
-	total_len = srclen + dstlen;
-	if (dstsize <= dstlen)
-		return (srclen + dstsize);
-	ft_strlcpy(dst + dstlen, src, dstsize - dstlen);
-	return (total_len);
+	new_elem = (t_list *)malloc(sizeof(t_list));
+	if (!new_elem)
+		return (NULL);
+	new_elem->content = content;
+	new_elem->next = NULL;
+	return (new_elem);
 }

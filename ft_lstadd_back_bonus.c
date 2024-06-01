@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/31 18:27:15 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/05/31 18:29:01 by rgrochow         ###   ########.fr       */
+/*   Created: 2024/03/29 23:34:47 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 17:56:47 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	size_t	srclen;
-	size_t	dstlen;
-	size_t	total_len;
+	t_list	*last;
 
-	srclen = ft_strlen(src);
-	dstlen = ft_strlen(dst);
-	total_len = srclen + dstlen;
-	if (dstsize <= dstlen)
-		return (srclen + dstsize);
-	ft_strlcpy(dst + dstlen, src, dstsize - dstlen);
-	return (total_len);
+	if (!lst || !new)
+		return ;
+	last = ft_lstlast(*lst);
+	if (!last)
+		*lst = new;
+	else
+		last->next = new;
 }

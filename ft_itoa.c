@@ -1,51 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/31 20:02:23 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 20:24:14 by rgrochow         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static size_t ft_num_digits(int n)
+static char	*ft_char(char *s, unsigned int number, long int len)
 {
-	size_t count = 0;
-	if (n < 0)
+	while (number > 0)
 	{
-		count++;
-		n = -n;
+		s[len--] = 48 + (number % 10);
+		number = number / 10;
 	}
-	while (n > 0)
-	{
-		count++;
-		n /= 10;
-	}
-	return count;
+	return (s);
 }
 
-char *ft_itoa(int n)
+static long int	ft_len(int n)
 {
-	size_t len = ft_num_digits(n);
-	char *str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
+	int	len;
+
+	len = 0;
+	if (n <= 0)
+		len = 1;
+	while (n != 0)
 	{
-		return NULL;
+		len++;
+		n = n / 10;
 	}
-	size_t i = 0;
+	return (len);
+}
+
+char	*ft_itoa(int n)
+{
+	char			*s;
+	long int		len;
+	unsigned int	number;
+	int				sign;
+
+	sign = 1;
+	len = ft_len(n);
+	s = (char *)malloc(sizeof(char) * (len + 1));
+	if (!(s))
+		return (NULL);
+	s[len--] = '\0';
+	if (n == 0)
+		s[0] = '0';
 	if (n < 0)
 	{
-		str[i++] = '-';
-		n = -n;
+		sign *= -1;
+		number = n * -1;
+		s[0] = '-';
 	}
-	do
-	{
-		str[i++] = '0' + (n % 10);
-		n /= 10;
-	} while (n > 0);
-	str[i] = '\0';
-	size_t start = (str[0] == '-') ? 1 : 0;
-	size_t end = len - 1;
-	while (start < end)
-	{
-		char temp = str[start];
-		str[start] = str[end];
-		str[end] = temp;
-		start++;
-		end--;
-	}
-
-	return str;
+	else
+		number = n;
+	s = ft_char(s, number, len);
+	return (s);
 }

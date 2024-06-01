@@ -6,27 +6,32 @@
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 17:17:57 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/05/31 17:17:58 by rgrochow         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:14:32 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_atoi(const char *str)
-{
-	int result = 0;
-	int sign = 1;
+#include "libft.h"
 
-	while (*str && ((*str >= 9 && *str <= 13) || *str == ' '))
+int	ft_atoi(const char *str)
+{
+	int	result;
+	int	sign;
+
+	result = 0;
+	sign = 1;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
-	if (*str == '-' || *str == '+')
+	if (*str == '-')
 	{
-		if (*str == '-')
-			sign = -1;
+		sign = -1;
 		str++;
 	}
-	while (*str && *str >= '0' && *str <= '9')
+	else if (*str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
 	{
 		result = result * 10 + (*str - '0');
 		str++;
 	}
-	return result * sign;
+	return (result * sign);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/03 20:01:03 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/04/03 20:04:24 by rgrochow         ###   ########.fr       */
+/*   Created: 2024/05/31 18:42:44 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 21:52:51 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	char	*cdst;
+	char	*csrc;
 
-	d = dst;
-	s = src;
-	if (d < s)
+	if (dst == NULL)
+		return (NULL);
+	if (src == NULL || len == 0)
+		return (dst);
+	if (dst == src)
+		return (dst);
+	cdst = dst;
+	csrc = (char *)src;
+	if (src < dst)
 	{
+		csrc += len;
+		cdst += len;
 		while (len--)
-			*d++ = *s++;
+		{
+			*--cdst = *--csrc;
+		}
 	}
 	else
-	{
-		d += len - 1;
-		s += len - 1;
 		while (len--)
-			*d-- = *s--;
-	}
+			*cdst++ = *csrc++;
 	return (dst);
 }

@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgrochow <staafnet@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 07:12:05 by rgrochow          #+#    #+#             */
-/*   Updated: 2024/04/05 07:21:34 by rgrochow         ###   ########.fr       */
+/*   Created: 2024/05/31 17:42:57 by rgrochow          #+#    #+#             */
+/*   Updated: 2024/05/31 17:43:01 by rgrochow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isprint(int c)
 {
